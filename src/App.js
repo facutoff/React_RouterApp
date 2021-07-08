@@ -1,9 +1,13 @@
-import './App.css';
+import React from "react";
+import AppRouter from "./routers/AppRouter";
+import AuthProvider from "./auth/AuthProvider";
 
 function App() {
   return (
     <div className="App">
-      Hola Mundo!
+      <AuthProvider>
+        <AppRouter />
+      </AuthProvider>
     </div>
   );
 }
