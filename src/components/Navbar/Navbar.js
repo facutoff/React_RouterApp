@@ -1,5 +1,4 @@
 import { NavLink } from "react-router-dom";
-import { AuthContext } from "../../auth/AuthProvider";
 import useAuth from "../../auth/useAuth";
 import './Navbar.css'
 
@@ -20,21 +19,29 @@ export default function Navbar() {
                 <li>
                     <NavLink to='/categories' activeClassName='active'>Categories</NavLink>
                 </li>
-                <li>
-                    <NavLink to='/login' activeClassName='active'>Login</NavLink>
-                </li>
-                <li>
-                    <NavLink to='/register' activeClassName='active'>Register</NavLink>
-                </li>
-                <li>
-                    <NavLink to='/dashboard' activeClassName='active'>Dashboard</NavLink>
-                </li>
-                <li>
-                    <NavLink to='/payments' activeClassName='active'>Payments</NavLink>
-                </li>
-                <li>
-                    <button onClick={auth.logout} >LogOut</button>
-                </li>
+                {!auth.isLogged() && (
+                    <>
+                        <li>
+                            <NavLink to='/login' activeClassName='active'>Login</NavLink>
+                        </li>
+                        <li>
+                            <NavLink to='/register' activeClassName='active'>Register</NavLink>
+                        </li>
+                    </>
+                )}
+                {auth.isLogged() && (
+                    <>
+                        <li>
+                            <NavLink to='/dashboard' activeClassName='active'>Dashboard</NavLink>
+                        </li>
+                        <li>
+                            <NavLink to='/payments' activeClassName='active'>Payments</NavLink>
+                        </li>
+                        <li>
+                            <button onClick={auth.logout} >LogOut</button>
+                        </li>
+                    </>
+                )}
             </ul>
         </nav>
     )
